@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import API from './adapters/API'
+import Dropdown from './components/Dropdown'
+import EventList from './components/EventList'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    events: []
+  }
+
+  search = (query) => {
+    API.searchEvents(query)
+    .then(resp => this.setState({events: JSON.parse(resp).events}))
+  }
+
+  render() {
+
+    return <>
+            <Dropdown search={this.search} options={API.searchOptions}/>
+            {(this.state.events.length > 0) ? <EventList events={this.state.events} /> : <div>There are no upcoming events for that =(</div>}
+          </>
+  }
 }
 
 export default App;
