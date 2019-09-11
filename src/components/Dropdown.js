@@ -15,7 +15,7 @@ const Dropdown = ({ options, search }) => {
     if (selection) { search(selection) }
   }, [search, selection])
 
-  return <select value={selection} onChange={handleChange}>
+  return <select class="dropdown" value={selection} onChange={handleChange}>
     {options.map(opt => {
       return <option key={opt} value={opt}>{optToReadable(opt)}</option>
     })}
