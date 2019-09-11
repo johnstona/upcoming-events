@@ -1,5 +1,7 @@
 let SEARCH_URL = ''
 
+// access proxy node server in development for search
+
 if (window.location.href.includes('localhost')) {
   SEARCH_URL = 'http://localhost:3000';
 } else {

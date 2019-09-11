@@ -3,16 +3,19 @@ import moment from 'moment'
 
 const EventList = ({ events }) => {
   console.log(events)
-  return events.map(event => {
-    return <div key={event.id} className='event'>
-      <div className='event-name'>
-        {event.name}
+  return <div className='container'>
+    {events.map(event => {
+      return <div key={event.id} className='row'>
+        <div className='col-sm'>
+          {event.name}
+        </div>
+        <div className='col-sm'>
+          {moment(event.start_datetime).calendar()}
+        </div>
       </div>
-      <div className='event-time'>
-        {moment(event.start_datetime).calendar()}
-      </div>
-    </div>
-  })
+    }
+    )}
+  </div>
 }
 
 export default EventList
